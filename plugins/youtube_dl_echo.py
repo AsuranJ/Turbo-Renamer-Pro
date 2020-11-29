@@ -21,7 +21,7 @@ else:
     from config import Config
 
 # the Strings used for this "thing"
-from translation import Translation
+from translation1 import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
@@ -33,7 +33,7 @@ from helper_funcs.help_uploadbot import DownLoadFile
 
 @pyrogram.Client.on_message(pyrogram.Filters.regex(pattern=".*http.*"))
 async def echo(bot, update):
-    if update.from_user.id not in Config.AUTH_USERS:
+    if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
@@ -105,6 +105,9 @@ async def echo(bot, update):
             "-j",
             url
         ]
+    if "hotstar" in url:
+        command_to_exec.append("--geo-bypass-country")
+        command_to_exec.append("IN")
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
         command_to_exec.append(youtube_dl_username)
