@@ -23,7 +23,7 @@ else:
     from config import Config
 
 # the Strings used for this "thing"
-from translation import Translation
+from translation1 import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
@@ -148,6 +148,9 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec.append(youtube_dl_password)
     command_to_exec.append("--no-warnings")
     # command_to_exec.append("--quiet")
+    if "hotstar" in youtube_dl_url:
+        command_to_exec.append("--geo-bypass-country")
+        command_to_exec.append("IN")
     logger.info(command_to_exec)
     start = datetime.now()
     process = await asyncio.create_subprocess_exec(
@@ -197,7 +200,7 @@ async def youtube_dl_call_back(bot, update):
                 is_w_f,
                 Config.DEF_WATER_MARK_FILE,
                 300,
-                9
+                1
             )
             logger.info(images)
             await bot.edit_message_text(
@@ -322,9 +325,9 @@ async def youtube_dl_call_back(bot, update):
             media_album_p = []
             if images is not None:
                 i = 0
-                caption = "© @AnyDLBot"
+                caption = "© @SerialCoIn"
                 if is_w_f:
-                    caption = "/upgrade to Plan D to remove the watermark\n© @AnyDLBot"
+                    caption = "/upgrade to Plan D to remove the watermark\n© @SerialCoIn"
                 for image in images:
                     if os.path.exists(image):
                         if i == 0:
