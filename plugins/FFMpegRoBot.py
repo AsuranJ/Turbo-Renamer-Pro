@@ -33,7 +33,7 @@ from hachoir.parser import createParser
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["ffmpegrobot"]))
 async def ffmpegrobot_ad(bot, update):
-    if update.from_user.id not in Config.AUTH_USERS:
+    if update.from_user.id not in Config.BANNED_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
@@ -51,7 +51,7 @@ async def ffmpegrobot_ad(bot, update):
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["trim"]))
 async def trim(bot, update):
-    if update.from_user.id not in Config.AUTH_USERS:
+    if update.from_user.id not in Config.BANNED_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
