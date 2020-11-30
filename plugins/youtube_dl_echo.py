@@ -13,6 +13,7 @@ import json
 import math
 import os
 import time
+from youtube_dl import YoutubeDL
 
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
